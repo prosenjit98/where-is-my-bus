@@ -4,7 +4,7 @@ Bare React Native app for Android and iOS, in English or Bengali. It plans journ
 so search works offline, shows live buses from the server, and runs the "I'm on this bus" trip:
 a stop alarm, and, if the rider agrees, pseudonymous sharing of the bus position. Riders can also
 send family a link to follow the bus, tell others a bus just left their stop, and suggest fixes;
-conductors' phones remember their bus's code between shifts.
+conductors sign in and share their owner's bus by its number plate.
 
 This folder holds the app's code, a small native module in `native/wimb-location` for
 location, the trip foreground service and the stop alarm, and the `android` and `ios`
@@ -158,7 +158,7 @@ in `Images.xcassets` and a launch screen storyboard with the logo; check both on
 
 ## Languages
 
-Every screen is in English or Bengali, with a button on the first screen; the choice is kept on
+Every screen is in English or Bengali, chosen in Settings (the home screen's menu); the choice is kept on
 the phone, and until it is made the app follows the phone's language. The Bengali wording is in
 `packages/core/src/bn.ts`, shared with the web app; `npm test` in the top folder fails if any text
 lacks it. Stop names are shown in Bengali script where the network has them.

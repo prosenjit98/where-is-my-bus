@@ -28,7 +28,7 @@ mobile/android/app/release.keystore
 data/osm-*.json
 # Drafts built from OpenStreetMap (ODbL) by the route research: same decision pending
 data/draft-routes-*.json
-data/seed-kolkata.json
+# data/seed-kolkata.json
 
 /backend/.env
 /deploy.env

@@ -22,10 +22,13 @@ conductors who run the app all trip. Journey search works offline on the phone.
 
 ## Run it
 
-Needs Node 22.18 or newer, which runs TypeScript directly. Nothing to install for the server.
+Needs Node 22.18 or newer, which runs TypeScript directly: there is no build step, only the
+backend's two libraries (the PostgreSQL and Redis clients) to install. Step by step, from a fresh
+clone: [docs/SETUP.md](docs/SETUP.md).
 
 ```sh
 cd backend
+npm install
 ADMIN_TOKEN=choose-a-long-secret npm start
 ```
 
