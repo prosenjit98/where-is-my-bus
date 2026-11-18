@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where Is My Bus admin</title>
+<link rel="icon" href="/web/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/web/vendor/fonts/fonts.css">
+<link rel="stylesheet" href="/web/vendor/leaflet/leaflet.css">
+<style>
+  :root {
+    --bg: #F4F7FA;
+    --surface: #FFFFFF;
+    --ink: #16202A;
+    --ink-soft: #5A6876;
+    --line: #D9E1E8;
+    --blue: #1F66B1;
+    --blue-ink: #FFFFFF;
+    --board: #1E2833;
+    --paint: #F4C430;
+    --danger: #B3261E;
+    --ok: #1E7A4C;
+    --private: #F4C430;
+    --govt: #5AA9E6;
+    --mini: #4CAF7A;
+    --other: #A0AAB4;
+    --font: 'Hind Siliguri', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --board-font: 'Teko', 'Arial Narrow', sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0F151C;
+      --surface: #17212B;
+      --ink: #E8EEF3;
+      --ink-soft: #9AA8B5;
+      --line: #2A3642;
+      --blue: #6AA8EC;
+      --blue-ink: #0F151C;
+      --board: #0B1117;
+      --danger: #F2B8B5;
+      --ok: #7FD1A6;
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body { font: 15px/1.5 var(--font); color: var(--ink); background: var(--bg); }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+  .app { --nav-w: 236px; display: grid; grid-template-columns: var(--nav-w) minmax(340px, 430px) 1fr; height: 100vh; }
+  .app.nav-collapsed { --nav-w: 68px; }
+  aside { display: flex; flex-direction: column; min-height: 0; background: var(--surface); border-right: 1px solid var(--line); }
+  .app.wide aside { grid-column: 2 / 4; background: var(--bg); }
+  .app.wide #map { display: none; }
+
+  /* The side nav: the panel's parts, with icons; it folds to the icons alone. */
+  .nav { grid-row: 1; grid-column: 1; display: flex; flex-direction: column; gap: 4px; min-height: 0; padding: 14px 10px 12px; background: var(--board); color: #E8EEF3; position: relative; z-index: 1100; }
+  .nav-top { display: flex; align-items: center; gap: 10px; padding: 2px 4px 12px; min-height: 52px; }
+  .nav-top .mark { flex: none; border-radius: 9px; }
+  .nav-brand { min-width: 0; }
+  .nav-brand h1 { margin: 0; font-size: 16px; font-weight: 700; line-height: 1.2; white-space: nowrap; }
+  .nav-brand p { margin: 2px 0 0; font-size: 12px; color: #9AA8B5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .nav-toggle { position: absolute; top: 18px; right: -15px; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 6px rgba(19, 32, 51, 0.2); padding: 0; }
+  .nav-toggle .icon { width: 16px; height: 16px; }
+  .nav-items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; overflow-y: auto; flex: 1; min-height: 0; }
+  .nav-foot { display: flex; flex-direction: column; gap: 2px; border-top: 1px solid rgba(255, 255, 255, 0.12); padding-top: 8px; }
+  .nav-item { display: flex; align-items: center; gap: 12px; width: 100%; padding: 9px 12px; border: 0; border-radius: 10px; background: none; color: #C9D3DC; font: 500 14px/1.2 var(--font); text-align: left; text-decoration: none; cursor: pointer; white-space: nowrap; position: relative; }
+  .nav-item:hover { background: rgba(255, 255, 255, 0.08); color: #FFFFFF; }
+  .nav-item[aria-current="page"] { background: var(--blue); color: var(--blue-ink); }
+  .nav-item .icon { flex: none; }
+  .nav-item .label { overflow: hidden; text-overflow: ellipsis; }
+  .nav .badge { margin-left: auto; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: var(--paint); color: #1E2833; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+  .nav :focus-visible { outline-color: var(--paint); }
+  .app.nav-collapsed .nav-brand, .app.nav-collapsed .nav .label { display: none; }
+  .app.nav-collapsed .nav-item { justify-content: center; padding: 10px 0; }
+  .app.nav-collapsed .nav .badge { position: absolute; top: 2px; right: 4px; min-width: 16px; height: 16px; font-size: 10px; padding: 0 4px; }
+  .app.nav-collapsed .nav-top { justify-content: center; }
+
+  .panel { flex: 1; overflow: auto; padding: 16px 20px 40px; }
+  h2 { font-size: 18px; margin: 4px 0 12px; }
+  h3 { font-size: 15px; margin: 22px 0 8px; }
+  .soft { color: var(--ink-soft); font-size: 14px; margin: 0 0 12px; }
+  .hint { color: var(--ink-soft); font-size: 13px; margin: 4px 0 0; }
+
+  .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .row.spread { justify-content: space-between; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; }
+  .field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+  .field label { font-size: 13px; font-weight: 600; }
+  input, select, textarea { width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+  textarea { min-height: 64px; resize: vertical; }
+  input[readonly] { color: var(--ink-soft); }
+
+  .btn { border: 1px solid var(--line); background: var(--surface); padding: 7px 14px; border-radius: 8px; cursor: pointer; font-weight: 500; }
+  a.btn { display: inline-block; color: inherit; text-decoration: none; }
+  .btn:hover { border-color: var(--ink-soft); }
+  .btn.primary { background: var(--blue); border-color: var(--blue); color: var(--blue-ink); }
+  .btn.danger { color: var(--danger); }
+  .btn.small { padding: 3px 9px; font-size: 13px; }
+  .btn[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+  .btn:disabled { opacity: 0.5; cursor: default; }
+
+  .list { list-style: none; margin: 8px 0 0; padding: 0; }
+  .list li + li { border-top: 1px solid var(--line); }
+  .item { display: flex; gap: 12px; align-items: center; width: 100%; text-align: left; border: 0; background: none; padding: 10px 4px; cursor: pointer; }
+  .item:hover { background: var(--bg); }
+  .item .name { font-weight: 600; }
+  .item .meta { font-size: 13px; color: var(--ink-soft); }
+  .bn { font-size: 14px; color: var(--ink-soft); }
+  .entry { display: flex; flex-direction: column; gap: 6px; padding: 10px 4px; }
+  .entry .name, .strong-line { font-weight: 600; margin: 0; }
+  .entry .meta { font-size: 13px; color: var(--ink-soft); }
+  .chip { display: inline-block; margin-left: 8px; font-size: 12px; font-weight: 600; border: 1px solid var(--line); border-radius: 999px; padding: 0 8px; vertical-align: middle; }
+  .chip.warn { border-color: #9A6700; color: #9A6700; }
+  @media (prefers-color-scheme: dark) { .chip.warn { border-color: #E8B44C; color: #E8B44C; } }
+  fieldset.checks { border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px 10px; margin: 0 0 12px; max-height: 220px; overflow: auto; }
+  fieldset.checks legend { font-size: 13px; font-weight: 600; padding: 0 4px; }
+  .check { display: flex; gap: 8px; align-items: center; padding: 3px 0; font-size: 14px; }
+  .check input { width: auto; }
+  /* Who signs in for an owner, and the accounts waiting for approval. */
+  .people-list { list-style: none; margin: 2px 0 4px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .people-list li { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .list .people-list li + li { border-top: 0; }
+  .people-list .grow { flex: 1; min-width: 180px; display: flex; flex-direction: column; }
+  .person-name { font-size: 14px; }
+  .waiting { border: 1px solid #E8B44C; background: color-mix(in srgb, #FFF4DB 70%, transparent); border-radius: 10px; padding: 12px 14px; margin: 0 0 16px; }
+  @media (prefers-color-scheme: dark) { .waiting { background: #33270F; border-color: #8A6A2A; } }
+  .temp-password { font-size: 20px; font-weight: 700; letter-spacing: 0.08em; font-variant-numeric: tabular-nums; }
+  .card-form { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin-top: 8px; }
+  .msg .field { margin: 10px 0 8px; }
+  table.acc { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table.acc th, table.acc td { text-align: left; padding: 8px 6px; border-top: 1px solid var(--line); vertical-align: top; }
+  table.acc thead th { color: var(--ink-soft); font-weight: 500; border-top: 0; }
+
+  /* The route board: the one loud element, like the painted number boards on Kolkata buses. */
+  .board { display: inline-flex; align-items: center; justify-content: center; min-width: 52px; height: 32px; padding: 3px 9px 0; background: var(--board); color: var(--paint); font: 600 23px/1 var(--board-font); letter-spacing: 0.02em; border-radius: 3px; border-left: 5px solid var(--private); flex: none; }
+  .board.govt { border-left-color: var(--govt); }
+  .board.mini { border-left-color: var(--mini); }
+  .board.other { border-left-color: var(--other); }
+  .board.line { border-left: 0; border-radius: 999px; padding: 0 11px; color: #FFFFFF; font: 700 15px/1 var(--font); letter-spacing: 0; }
+  .board.line.on-light { color: #1E2833; }
+
+  .msg { border-radius: 8px; padding: 10px 12px; margin: 0 0 14px; font-size: 14px; border: 1px solid var(--line); }
+  .msg.error { border-color: var(--danger); color: var(--danger); }
+  .msg.ok { border-color: var(--ok); color: var(--ok); }
+  .msg ul { margin: 6px 0 0; padding-left: 18px; }
+  .banner { background: var(--board); color: var(--paint); border-radius: 8px; padding: 10px 12px; margin-bottom: 14px; display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+  .banner .btn { background: transparent; color: var(--paint); border-color: var(--paint); }
+
+  .pattern-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+  .seq-list { list-style: none; counter-reset: seq; padding: 0; margin: 6px 0 8px; }
+  .seq-list li { counter-increment: seq; display: flex; align-items: center; gap: 8px; padding: 5px 0; border-top: 1px solid var(--line); }
+  .seq-list li::before { content: counter(seq); width: 24px; height: 24px; border-radius: 50%; background: var(--blue); color: var(--blue-ink); font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+  .seq-list .grow { flex: 1; min-width: 0; }
+  .divider { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
+
+  #map { height: 100%; background: var(--bg); }
+  #map.picking, #map.adding { cursor: crosshair; }
+  .map-missing { padding: 40px; color: var(--ink-soft); max-width: 420px; }
+  .seq { background: var(--blue); color: var(--blue-ink); border-radius: 50%; font: 600 12px/22px var(--font); text-align: center; box-shadow: 0 0 0 2px var(--surface); }
+  .pin { background: var(--paint); border: 3px solid var(--board); border-radius: 50%; }
+
+  @media (max-width: 900px) {
+    .app, .app.nav-collapsed { --nav-w: 68px; grid-template-columns: 68px 1fr; grid-template-rows: auto 55vh; height: auto; }
+    .nav { grid-row: 1 / 3; position: sticky; top: 0; height: 100vh; }
+    aside { grid-column: 2; border-right: 0; border-bottom: 1px solid var(--line); }
+    #map { grid-column: 2; height: 55vh; }
+    .app.wide aside { grid-column: 2; grid-row: 1 / 3; }
+    .app:not(.nav-collapsed) .nav { position: fixed; left: 0; top: 0; bottom: 0; width: 236px; box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.35); }
+  }
+  /* The dashboard: headline numbers, then cards. */
+  .dash { max-width: 1280px; margin: 0 auto; }
+  .dash-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .dash-head h2 { font-size: 22px; margin: 4px 0; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin: 8px 0 14px; }
+  .tile { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; min-width: 0; }
+  .tile-label { margin: 0; font-size: 13px; font-weight: 600; color: var(--ink-soft); }
+  .tile-value { margin: 2px 0; font-size: 30px; font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; }
+  .tile-sub { margin: 0; font-size: 12.5px; color: var(--ink-soft); }
+  .dash-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); gap: 14px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; min-width: 0; }
+  .card.wide { grid-column: 1 / -1; display: grid; grid-template-columns: 2fr 1fr; gap: 6px 16px; align-items: start; }
+  .card.wide h3 { grid-column: 1 / -1; }
+  .card h3 { margin: 0 0 10px; font-size: 15px; }
+  .dash-map { height: 340px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); isolation: isolate; }
+  .list.compact { margin: 0; }
+  .route-row { display: flex; align-items: center; gap: 10px; padding: 7px 2px; }
+  .route-row .grow, .attention .grow { flex: 1; min-width: 0; }
+  .board.sm { min-width: 38px; height: 24px; font-size: 17px; padding: 2px 6px 0; border-left-width: 4px; }
+  .bus-icon { background: none; border: 0; }
+  .bus-pin { display: inline-flex; transform: translate(-50%, -50%); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); border-radius: 4px; }
+  .attention { list-style: none; margin: 0; padding: 0; }
+  .attention li { display: flex; gap: 10px; align-items: baseline; padding: 8px 0; border-top: 1px solid var(--line); font-size: 14px; }
+  .attention li:first-child { border-top: 0; }
+  .link { border: 0; background: none; padding: 0; color: var(--blue); font-weight: 600; cursor: pointer; white-space: nowrap; }
+  .all-good { margin: 0; color: var(--ok); font-weight: 600; }
+  .chart-wrap { position: relative; }
+  .chart { width: 100%; height: auto; display: block; overflow: visible; }
+  .chart .grid { stroke: var(--line); stroke-width: 1; }
+  .chart .axis { stroke: var(--ink-soft); stroke-width: 1; }
+  .chart .tick { fill: var(--ink-soft); font: 11px var(--font); }
+  .chart .bar { fill: var(--blue); }
+  .chart .bar.hover { opacity: 0.75; }
+  .chart .hit { fill: transparent; cursor: default; outline: none; }
+  .chart .hit:focus-visible { stroke: var(--blue); stroke-width: 2; }
+  .chart-tip { position: absolute; top: 0; transform: translate(-50%, -100%); background: var(--ink); color: var(--surface); border-radius: 8px; padding: 6px 10px; font-size: 12.5px; display: flex; flex-direction: column; align-items: center; pointer-events: none; white-space: nowrap; }
+  .chart-tip strong { font-size: 14px; }
+  .as-table { margin-top: 8px; font-size: 13px; }
+  .as-table summary { cursor: pointer; color: var(--blue); font-weight: 600; }
+  .hbars { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 6px; }
+  .hbars li { display: grid; grid-template-columns: 64px 1fr 64px; align-items: center; gap: 8px; font-size: 13px; }
+  .hbar-label { font-weight: 600; }
+  .hbar-track { height: 14px; }
+  .hbar { display: block; height: 14px; background: var(--blue); border-radius: 0 4px 4px 0; }
+  .hbar-value { font-variant-numeric: tabular-nums; color: var(--ink); }
+  dl.facts { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; margin: 0; font-size: 14px; }
+  dl.facts dt { color: var(--ink-soft); }
+  dl.facts dd { margin: 0; }
+  @media (max-width: 700px) { .card.wide { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <nav class="nav" aria-label="Admin">
+    <div class="nav-top">
+      <img class="mark" src="/web/icon.svg" alt="" width="34" height="34">
+      <div class="nav-brand">
+        <h1>Where Is My Bus</h1>
+        <p id="subtitle">Route admin</p>
+      </div>
+    </div>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-controls="nav-items" aria-expanded="true" aria-label="Hide the menu"></button>
+    <ul class="nav-items" id="nav-items"></ul>
+    <div class="nav-foot" id="nav-foot"></div>
+  </nav>
+  <aside>
+    <div class="panel" id="panel"></div>
+  </aside>
+  <main id="map" aria-label="Map of stops and routes"></main>
+</div>
+<script src="/web/vendor/leaflet/leaflet.js"></script>
+<script src="/admin.js"></script>
+</body>
+</html>

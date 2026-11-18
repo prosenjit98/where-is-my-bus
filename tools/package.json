@@ -1,0 +1,17 @@
+{
+  "name": "@wimb/tools",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Bus simulator and route import for Where Is My Bus. No runtime dependencies.",
+  "scripts": {
+    "simulate": "node --disable-warning=ExperimentalWarning simulate.ts",
+    "import-osm": "node --disable-warning=ExperimentalWarning import-osm.ts",
+    "test": "node --disable-warning=ExperimentalWarning --test \"test/**/*.test.ts\"",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.8.3"
+  }
+}

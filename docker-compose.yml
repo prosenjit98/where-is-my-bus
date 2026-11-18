@@ -1,0 +1,78 @@
+# Where Is My Bus on one Linux server: the app (one process per CPU core), PostgreSQL and Redis.
+#
+#   cp deploy.env.example deploy.env      then set the passwords and addresses in it
+#   docker compose --env-file deploy.env up -d --build
+#
+# Only the app's port is published. Put a reverse proxy with HTTPS in front of it (browsers share
+# location only over HTTPS); TRUST_PROXY=1 below lets rate limits see riders' real addresses.
+# For more than one server, run the app on each against the same PostgreSQL and Redis, behind a
+# load balancer: every app process keeps the same live buses through Redis.
+
+services:
+  app:
+    build: .
+    image: where-is-my-bus:latest
+    command: ["node", "--disable-warning=ExperimentalWarning", "backend/src/cluster.ts"]
+    init: true
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    environment:
+      DATABASE_URL: postgres://wimb:${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in deploy.env}@postgres:5432/wimb
+      REDIS_URL: redis://:${REDIS_PASSWORD:?set REDIS_PASSWORD in deploy.env}@redis:6379
+      ADMIN_TOKEN: ${ADMIN_TOKEN:?set ADMIN_TOKEN in deploy.env}
+      PUBLIC_URL: ${PUBLIC_URL:-}
+      SMS_WEBHOOK_URL: ${SMS_WEBHOOK_URL:-}
+      SMS_WEBHOOK_TOKEN: ${SMS_WEBHOOK_TOKEN:-}
+      OSRM_URL: ${OSRM_URL:-}
+      TRIP_HISTORY_DAYS: ${TRIP_HISTORY_DAYS:-90}
+      TRUST_PROXY: "1"
+      # Processes on this machine; one per CPU core when empty.
+      WORKERS: ${WORKERS:-}
+      SERVER_ID: ${SERVER_ID:-bus-1}
+      # The network an empty database starts from: the Kolkata routes (data/seed-kolkata.json).
+      SEED_FILE: ${SEED_FILE:-/app/data/seed-kolkata.json}
+    volumes:
+      # Files from a server that ran without a database can be put here: on an empty database they
+      # are copied in on first start (network.json, owners.json, secret.key, trips/, ...).
+      - app-data:/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:17-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: wimb
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in deploy.env}
+      POSTGRES_DB: wimb
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wimb -d wimb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:8-bookworm
+    restart: unless-stopped
+    # Kept on disk too (append-only file), so codes and links survive a restart.
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD:?set REDIS_PASSWORD in deploy.env}"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$$REDIS_PASSWORD\" --no-auth-warning ping | grep -q PONG"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?set REDIS_PASSWORD in deploy.env}
+
+volumes:
+  app-data:
+  postgres-data:
+  redis-data:

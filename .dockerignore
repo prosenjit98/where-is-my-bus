@@ -1,0 +1,16 @@
+# Only what the server needs goes into the image (see Dockerfile).
+**/node_modules
+**/.env
+**/*.log
+.git
+.vscode
+backend/data
+backend/test
+mobile
+e2e
+tools
+docs
+assets
+packages/core/test
+web/tsconfig.json
+*.md

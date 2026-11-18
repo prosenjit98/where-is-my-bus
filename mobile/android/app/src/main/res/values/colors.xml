@@ -1,0 +1,4 @@
+<resources>
+    <!-- Kolkata's civic blue: the splash screen, and the window until the app's first screen draws. -->
+    <color name="brand_blue">#1F66B1</color>
+</resources>

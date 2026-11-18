@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- For Android 13's themed icons, which use one colour: the pin, with the bus cut out of it and
+     its route board, windscreen and lights left in. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M54,83C49,76 31,62 31,47A23,23 0,0 1,77 47C77,62 59,76 54,83Z M47,33h14a5,5 0,0 1,5 5v15a5,5 0,0 1,-5 5h-14a5,5 0,0 1,-5 -5v-15a5,5 0,0 1,5 -5z M45.7,35.5h16.6a1.2,1.2 0,0 1,1.2 1.2v2.6a1.2,1.2 0,0 1,-1.2 1.2h-16.6a1.2,1.2 0,0 1,-1.2 -1.2v-2.6a1.2,1.2 0,0 1,1.2 -1.2z M46.3,42.5h15.4a1.8,1.8 0,0 1,1.8 1.8v4.4a1.8,1.8 0,0 1,-1.8 1.8h-15.4a1.8,1.8 0,0 1,-1.8 -1.8v-4.4a1.8,1.8 0,0 1,1.8 -1.8z M45.6,54.3a1.7,1.7 0,1 0,3.4 0a1.7,1.7 0,1 0,-3.4 0z M59,54.3a1.7,1.7 0,1 0,3.4 0a1.7,1.7 0,1 0,-3.4 0z" />
+</vector>

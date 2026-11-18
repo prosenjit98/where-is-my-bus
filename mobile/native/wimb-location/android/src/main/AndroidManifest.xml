@@ -1,0 +1,19 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- Merged into the app automatically.
+       No ACCESS_BACKGROUND_LOCATION: tracking runs in a foreground service that the rider
+       starts by tapping "I'm on this bus", which Android counts as while-in-use access. -->
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+  <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+  <uses-permission android:name="android.permission.VIBRATE" />
+
+  <application>
+    <service
+      android:name="com.wimb.location.TripLocationService"
+      android:exported="false"
+      android:foregroundServiceType="location"
+      android:stopWithTask="true" />
+  </application>
+</manifest>

@@ -1,0 +1,19 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
+        <!-- Blue until React Native draws, which then shows the same blue start screen while the
+             routes load, so the launch has no white flash. -->
+        <item name="android:windowBackground">@color/brand_blue</item>
+    </style>
+
+    <!-- The splash screen: the logo on blue. On Android 12 and later the system draws it; on older
+         versions androidx.core:core-splashscreen draws the same. -->
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/brand_blue</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
+    </style>
+
+</resources>

@@ -1,0 +1,671 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-27T00:00:00.000Z",
+  "region": "Kolkata",
+  "notice": "Demo data for development: coordinates are approximate and route numbers are invented. Replace it with surveyed routes before launch.",
+  "stops": [
+    {
+      "id": "howrah-stn",
+      "name": "Howrah Station",
+      "nameBn": "হাওড়া স্টেশন",
+      "aliases": [
+        "Howrah",
+        "Haora",
+        "Howrah Stn"
+      ],
+      "lat": 22.5839,
+      "lng": 88.3425
+    },
+    {
+      "id": "bbd-bag",
+      "name": "BBD Bag",
+      "nameBn": "বিবাদী বাগ",
+      "aliases": [
+        "Dalhousie",
+        "Dalhousie Square",
+        "ডালহৌসি"
+      ],
+      "lat": 22.5726,
+      "lng": 88.3495
+    },
+    {
+      "id": "esplanade",
+      "name": "Esplanade",
+      "nameBn": "এসপ্ল্যানেড",
+      "aliases": [
+        "Dharmatala",
+        "Dharmatolla",
+        "ধর্মতলা"
+      ],
+      "lat": 22.5645,
+      "lng": 88.3517
+    },
+    {
+      "id": "park-street",
+      "name": "Park Street",
+      "nameBn": "পার্ক স্ট্রিট",
+      "aliases": [
+        "Park St"
+      ],
+      "lat": 22.553,
+      "lng": 88.352
+    },
+    {
+      "id": "exide-more",
+      "name": "Exide More",
+      "nameBn": "এক্সাইড মোড়",
+      "aliases": [
+        "Exide",
+        "Exide crossing"
+      ],
+      "lat": 22.544,
+      "lng": 88.351
+    },
+    {
+      "id": "hazra-more",
+      "name": "Hazra More",
+      "nameBn": "হাজরা মোড়",
+      "aliases": [
+        "Hazra",
+        "Hazra crossing"
+      ],
+      "lat": 22.5268,
+      "lng": 88.3461
+    },
+    {
+      "id": "kalighat",
+      "name": "Kalighat",
+      "nameBn": "কালীঘাট",
+      "aliases": [
+        "Kalighat metro"
+      ],
+      "lat": 22.5197,
+      "lng": 88.3455
+    },
+    {
+      "id": "tollygunge",
+      "name": "Tollygunge Phari",
+      "nameBn": "টালিগঞ্জ ফাঁড়ি",
+      "aliases": [
+        "Tollygunge",
+        "Tallyganj",
+        "Tolly Phari"
+      ],
+      "lat": 22.4983,
+      "lng": 88.3459
+    },
+    {
+      "id": "ballygunge-phari",
+      "name": "Ballygunge Phari",
+      "nameBn": "বালিগঞ্জ ফাঁড়ি",
+      "aliases": [
+        "Ballygunge",
+        "Baliganj"
+      ],
+      "lat": 22.5274,
+      "lng": 88.3638
+    },
+    {
+      "id": "gariahat",
+      "name": "Gariahat More",
+      "nameBn": "গড়িয়াহাট মোড়",
+      "aliases": [
+        "Gariahat",
+        "Gariahat crossing"
+      ],
+      "lat": 22.5186,
+      "lng": 88.3667
+    },
+    {
+      "id": "dhakuria",
+      "name": "Dhakuria",
+      "nameBn": "ঢাকুরিয়া",
+      "aliases": [
+        "Dhakuriya",
+        "Dhakuria Bridge"
+      ],
+      "lat": 22.508,
+      "lng": 88.37
+    },
+    {
+      "id": "jadavpur-8b",
+      "name": "Jadavpur 8B",
+      "nameBn": "যাদবপুর ৮বি",
+      "aliases": [
+        "8B bus stand",
+        "Jadavpur",
+        "Jadabpur",
+        "Jadavpur University"
+      ],
+      "lat": 22.4968,
+      "lng": 88.3714
+    },
+    {
+      "id": "garia",
+      "name": "Garia More",
+      "nameBn": "গড়িয়া মোড়",
+      "aliases": [
+        "Garia",
+        "Gariya"
+      ],
+      "lat": 22.464,
+      "lng": 88.389
+    },
+    {
+      "id": "sealdah",
+      "name": "Sealdah",
+      "nameBn": "শিয়ালদহ",
+      "aliases": [
+        "Sealdah Station",
+        "Shealdah",
+        "Sealda"
+      ],
+      "lat": 22.5675,
+      "lng": 88.37
+    },
+    {
+      "id": "moulali",
+      "name": "Moulali",
+      "nameBn": "মৌলালি",
+      "aliases": [
+        "Moulali crossing"
+      ],
+      "lat": 22.5622,
+      "lng": 88.3644
+    },
+    {
+      "id": "science-city",
+      "name": "Science City",
+      "nameBn": "সায়েন্স সিটি",
+      "aliases": [
+        "Science City crossing"
+      ],
+      "lat": 22.5395,
+      "lng": 88.3962
+    },
+    {
+      "id": "ruby",
+      "name": "Ruby More",
+      "nameBn": "রুবি মোড়",
+      "aliases": [
+        "Ruby",
+        "Ruby Hospital",
+        "Kasba Ruby"
+      ],
+      "lat": 22.5135,
+      "lng": 88.402
+    },
+    {
+      "id": "chingrighata",
+      "name": "Chingrighata",
+      "nameBn": "চিংড়িঘাটা",
+      "aliases": [
+        "Chingrighata crossing"
+      ],
+      "lat": 22.56,
+      "lng": 88.404
+    },
+    {
+      "id": "sector-v",
+      "name": "Sector V",
+      "nameBn": "সেক্টর ফাইভ",
+      "aliases": [
+        "Salt Lake Sector V",
+        "Sector 5",
+        "College More",
+        "Wipro More"
+      ],
+      "lat": 22.5726,
+      "lng": 88.432
+    },
+    {
+      "id": "ultadanga",
+      "name": "Ultadanga",
+      "nameBn": "উল্টোডাঙা",
+      "aliases": [
+        "Ultadanga crossing",
+        "Bidhannagar Road"
+      ],
+      "lat": 22.5927,
+      "lng": 88.3912
+    },
+    {
+      "id": "shyambazar",
+      "name": "Shyambazar",
+      "nameBn": "শ্যামবাজার",
+      "aliases": [
+        "Shyambazar 5 point",
+        "Shyambajar",
+        "Five Point Crossing"
+      ],
+      "lat": 22.601,
+      "lng": 88.373
+    },
+    {
+      "id": "karunamoyee",
+      "name": "Karunamoyee",
+      "nameBn": "করুণাময়ী",
+      "aliases": [
+        "Karunamoyee bus stand",
+        "Salt Lake Karunamoyee"
+      ],
+      "lat": 22.586,
+      "lng": 88.419
+    }
+  ],
+  "landmarks": [
+    {
+      "id": "victoria-memorial",
+      "name": "Victoria Memorial",
+      "nameBn": "ভিক্টোরিয়া মেমোরিয়াল",
+      "aliases": [
+        "Victoria"
+      ],
+      "lat": 22.5448,
+      "lng": 88.3426
+    },
+    {
+      "id": "sskm",
+      "name": "SSKM Hospital",
+      "nameBn": "এসএসকেএম হাসপাতাল",
+      "aliases": [
+        "PG Hospital",
+        "SSKM"
+      ],
+      "lat": 22.539,
+      "lng": 88.344
+    },
+    {
+      "id": "indian-museum",
+      "name": "Indian Museum",
+      "nameBn": "ভারতীয় জাদুঘর",
+      "aliases": [
+        "Jadughar"
+      ],
+      "lat": 22.5579,
+      "lng": 88.3511
+    },
+    {
+      "id": "new-market",
+      "name": "New Market",
+      "nameBn": "নিউ মার্কেট",
+      "aliases": [
+        "Hogg Market"
+      ],
+      "lat": 22.559,
+      "lng": 88.3527
+    },
+    {
+      "id": "south-city-mall",
+      "name": "South City Mall",
+      "nameBn": "সাউথ সিটি মল",
+      "aliases": [
+        "South City"
+      ],
+      "lat": 22.5016,
+      "lng": 88.3616
+    },
+    {
+      "id": "salt-lake-stadium",
+      "name": "Salt Lake Stadium",
+      "nameBn": "যুবভারতী ক্রীড়াঙ্গন",
+      "aliases": [
+        "Yuva Bharati Krirangan",
+        "Yuva Bharati"
+      ],
+      "lat": 22.5694,
+      "lng": 88.4097
+    }
+  ],
+  "routes": [
+    {
+      "id": "d1",
+      "number": "D1",
+      "operator": "private",
+      "firstBus": "06:00",
+      "lastBus": "21:30",
+      "defaultHeadwayMin": 12,
+      "headways": [
+        {
+          "from": "08:00",
+          "to": "11:00",
+          "minutes": 8
+        },
+        {
+          "from": "17:00",
+          "to": "20:30",
+          "minutes": 8
+        }
+      ],
+      "patterns": [
+        {
+          "id": "D1-UP-AM",
+          "direction": "UP",
+          "headsign": "Tollygunge Phari",
+          "stopIds": [
+            "howrah-stn",
+            "bbd-bag",
+            "esplanade",
+            "park-street",
+            "exide-more",
+            "hazra-more",
+            "kalighat",
+            "tollygunge"
+          ],
+          "activeWindows": [
+            {
+              "from": "05:00",
+              "to": "13:00"
+            }
+          ]
+        },
+        {
+          "id": "D1-UP-PM",
+          "direction": "UP",
+          "headsign": "Tollygunge Phari",
+          "stopIds": [
+            "howrah-stn",
+            "bbd-bag",
+            "esplanade",
+            "exide-more",
+            "hazra-more",
+            "kalighat",
+            "tollygunge"
+          ],
+          "activeWindows": [
+            {
+              "from": "13:00",
+              "to": "23:59"
+            }
+          ]
+        },
+        {
+          "id": "D1-DOWN",
+          "direction": "DOWN",
+          "headsign": "Howrah Station",
+          "stopIds": [
+            "tollygunge",
+            "kalighat",
+            "hazra-more",
+            "exide-more",
+            "park-street",
+            "esplanade",
+            "bbd-bag",
+            "howrah-stn"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d2",
+      "number": "D2",
+      "operator": "private",
+      "firstBus": "05:45",
+      "lastBus": "22:00",
+      "defaultHeadwayMin": 12,
+      "headways": [
+        {
+          "from": "08:00",
+          "to": "11:00",
+          "minutes": 9
+        },
+        {
+          "from": "17:00",
+          "to": "20:30",
+          "minutes": 9
+        }
+      ],
+      "patterns": [
+        {
+          "id": "D2-UP",
+          "direction": "UP",
+          "headsign": "Garia More",
+          "stopIds": [
+            "howrah-stn",
+            "bbd-bag",
+            "esplanade",
+            "park-street",
+            "exide-more",
+            "ballygunge-phari",
+            "gariahat",
+            "dhakuria",
+            "jadavpur-8b",
+            "garia"
+          ]
+        },
+        {
+          "id": "D2-DOWN",
+          "direction": "DOWN",
+          "headsign": "Howrah Station",
+          "stopIds": [
+            "garia",
+            "jadavpur-8b",
+            "dhakuria",
+            "gariahat",
+            "ballygunge-phari",
+            "exide-more",
+            "park-street",
+            "esplanade",
+            "bbd-bag",
+            "howrah-stn"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d3",
+      "number": "D3",
+      "operator": "mini",
+      "firstBus": "06:30",
+      "lastBus": "21:00",
+      "defaultHeadwayMin": 15,
+      "headways": [
+        {
+          "from": "08:00",
+          "to": "11:00",
+          "minutes": 10
+        },
+        {
+          "from": "17:00",
+          "to": "20:30",
+          "minutes": 10
+        }
+      ],
+      "patterns": [
+        {
+          "id": "D3-UP",
+          "direction": "UP",
+          "headsign": "Jadavpur 8B",
+          "stopIds": [
+            "esplanade",
+            "park-street",
+            "exide-more",
+            "ballygunge-phari",
+            "gariahat",
+            "dhakuria",
+            "jadavpur-8b"
+          ]
+        },
+        {
+          "id": "D3-DOWN",
+          "direction": "DOWN",
+          "headsign": "Esplanade",
+          "stopIds": [
+            "jadavpur-8b",
+            "dhakuria",
+            "gariahat",
+            "ballygunge-phari",
+            "exide-more",
+            "park-street",
+            "esplanade"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d4",
+      "number": "D4",
+      "operator": "govt",
+      "firstBus": "06:00",
+      "lastBus": "21:00",
+      "defaultHeadwayMin": 20,
+      "headways": [
+        {
+          "from": "08:00",
+          "to": "11:00",
+          "minutes": 15
+        },
+        {
+          "from": "17:00",
+          "to": "20:30",
+          "minutes": 15
+        }
+      ],
+      "patterns": [
+        {
+          "id": "D4-UP",
+          "direction": "UP",
+          "headsign": "Garia More",
+          "stopIds": [
+            "shyambazar",
+            "sealdah",
+            "moulali",
+            "science-city",
+            "ruby",
+            "garia"
+          ]
+        },
+        {
+          "id": "D4-DOWN",
+          "direction": "DOWN",
+          "headsign": "Shyambazar",
+          "stopIds": [
+            "garia",
+            "ruby",
+            "science-city",
+            "moulali",
+            "sealdah",
+            "shyambazar"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d5",
+      "number": "D5",
+      "operator": "private",
+      "firstBus": "07:00",
+      "lastBus": "21:00",
+      "defaultHeadwayMin": 15,
+      "headways": [
+        {
+          "from": "08:00",
+          "to": "11:00",
+          "minutes": 10
+        },
+        {
+          "from": "17:00",
+          "to": "20:30",
+          "minutes": 10
+        }
+      ],
+      "patterns": [
+        {
+          "id": "D5-UP",
+          "direction": "UP",
+          "headsign": "Sector V",
+          "stopIds": [
+            "howrah-stn",
+            "bbd-bag",
+            "esplanade",
+            "moulali",
+            "chingrighata",
+            "sector-v"
+          ]
+        },
+        {
+          "id": "D5-DOWN",
+          "direction": "DOWN",
+          "headsign": "Howrah Station",
+          "stopIds": [
+            "sector-v",
+            "chingrighata",
+            "moulali",
+            "esplanade",
+            "bbd-bag",
+            "howrah-stn"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d6",
+      "number": "D6",
+      "operator": "private",
+      "firstBus": "06:30",
+      "lastBus": "21:30",
+      "defaultHeadwayMin": 12,
+      "headways": [],
+      "patterns": [
+        {
+          "id": "D6-UP",
+          "direction": "UP",
+          "headsign": "Sector V",
+          "stopIds": [
+            "shyambazar",
+            "ultadanga",
+            "karunamoyee",
+            "sector-v"
+          ]
+        },
+        {
+          "id": "D6-DOWN",
+          "direction": "DOWN",
+          "headsign": "Shyambazar",
+          "stopIds": [
+            "sector-v",
+            "karunamoyee",
+            "ultadanga",
+            "shyambazar"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d7",
+      "number": "AC-D7",
+      "name": "AC express",
+      "operator": "govt",
+      "firstBus": "07:00",
+      "lastBus": "20:00",
+      "defaultHeadwayMin": 20,
+      "headways": [],
+      "patterns": [
+        {
+          "id": "AC-D7-UP",
+          "direction": "UP",
+          "headsign": "Sector V",
+          "stopIds": [
+            "garia",
+            "ruby",
+            "science-city",
+            "chingrighata",
+            "sector-v"
+          ]
+        },
+        {
+          "id": "AC-D7-DOWN",
+          "direction": "DOWN",
+          "headsign": "Garia More",
+          "stopIds": [
+            "sector-v",
+            "chingrighata",
+            "science-city",
+            "ruby",
+            "garia"
+          ]
+        }
+      ]
+    }
+  ]
+}

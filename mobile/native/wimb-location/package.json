@@ -1,0 +1,12 @@
+{
+  "name": "wimb-location",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Trip location tracking, location status and stop-alarm notifications for Where Is My Bus.",
+  "main": "index.js",
+  "license": "UNLICENSED",
+  "files": ["android", "ios", "WimbLocation.podspec", "index.js"],
+  "peerDependencies": {
+    "react-native": "*"
+  }
+}

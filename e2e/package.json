@@ -1,0 +1,16 @@
+{
+  "name": "@wimb/e2e",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "End-to-end tests: the rider web app and admin panel in a real Chrome, against a real server.",
+  "scripts": {
+    "test": "node --disable-warning=ExperimentalWarning --test --test-concurrency=1 \"*.e2e.ts\"",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "playwright-core": "^1.56.0",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,34 @@
+node_modules/
+*.log
+.DS_Store
+
+# Runtime copy of the network that the admin panel edits
+backend/data/
+
+# Native build output (commit mobile/android and mobile/ios themselves)
+mobile/android/app/build/
+mobile/android/build/
+mobile/android/.gradle/
+mobile/android/app/.cxx/
+mobile/android/.kotlin/
+mobile/native/*/android/build/
+mobile/native/*/android/.gradle/
+.gradle/
+*.hprof
+mobile/ios/build/
+mobile/ios/Pods/
+mobile/vendor/
+
+# Android SDK location on this computer, and release signing keys
+mobile/android/local.properties
+*.jks
+mobile/android/app/release.keystore
+
+# Networks imported from OpenStreetMap: ODbL data, decide on licensing before committing
+data/osm-*.json
+# Drafts built from OpenStreetMap (ODbL) by the route research: same decision pending
+data/draft-routes-*.json
+data/seed-kolkata.json
+
+/backend/.env
+/deploy.env

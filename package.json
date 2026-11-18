@@ -1,0 +1,18 @@
+{
+  "name": "where-is-my-bus",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Live bus tracking and journey planning for West Bengal, without GPS on the buses.",
+  "scripts": {
+    "start": "npm --prefix backend start",
+    "test": "npm --prefix packages/core test && npm --prefix backend test && npm --prefix tools test",
+    "test:e2e": "npm --prefix e2e test",
+    "typecheck": "npm --prefix packages/core run typecheck && npm --prefix backend run typecheck && npm --prefix web run typecheck && npm --prefix tools run typecheck && npm --prefix e2e run typecheck",
+    "simulate": "node --disable-warning=ExperimentalWarning tools/simulate.ts",
+    "import-osm": "node --disable-warning=ExperimentalWarning tools/import-osm.ts",
+    "brand": "node --disable-warning=ExperimentalWarning tools/brand/make-brand.ts"
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}
